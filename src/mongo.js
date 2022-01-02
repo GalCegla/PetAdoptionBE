@@ -7,13 +7,19 @@ dotenv.config();
 const client = new MongoClient(process.env.MONGO_URL);
 
 function connect() {
-  client.connect((error, database) => {
+  client.connect(async (error, database) => {
     if (error) {
       console.log(error.message);
+      console.log("Error with DB connection", error.message);
+      process.kill(1);
     } else {
-      connectUsers(database);
-      connectPets(database);
-      console.log("connected!");
+      try {
+        await connectUsers(database);
+        await connectPets(database);
+        console.log("connected!");
+      } catch (error) {
+        console.log("Error with collections connection", error.message);
+      }
     }
   });
 }
