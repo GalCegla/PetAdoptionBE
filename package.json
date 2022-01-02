@@ -11,7 +11,7 @@
     "nodemon": "^2.0.15"
   },
   "scripts": {
-    "start": "nodemon server"
+    "start": "npx nodemon server"
   },
   "type": "module"
 }
