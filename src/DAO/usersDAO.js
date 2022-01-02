@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb";
 
 let db;
-export default function connectUsers(connection) {
+export default async function connectUsers(connection) {
   db = connection.db("pets").collection("users");
 }
 
