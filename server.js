@@ -2,6 +2,7 @@ import express, { json } from "express";
 import petControllers from "./src/api/controllers/petControllers.js";
 import userControllers from "./src/api/controllers/userControllers.js";
 import { ValidationError, validate } from "express-validation";
+import dotenv from "dotenv";
 import addUser from "./src/api/services/signupServices.js";
 import SIGNUP_VALIDATION_SCHEMA from "./src/api/validationSchemas/signupValidation.js";
 import LOGIN_VALIDATION_SCHEMA from "./src/api/validationSchemas/loginValidation.js";
@@ -11,6 +12,7 @@ import cors from "cors";
 import VERIFY_VALIDATION_SCHEMA from "./src/api/validationSchemas/verifyValidation.js";
 import verifyController from "./src/api/services/verifyServices.js";
 import imagekitController from "./src/api/services/imagekitServices.js";
+dotenv.config();
 
 const app = express();
 const port = 5000;
@@ -35,7 +37,7 @@ app.post("/login", validate(LOGIN_VALIDATION_SCHEMA), logIn);
 app.post("/auth/verify", validate(VERIFY_VALIDATION_SCHEMA), verifyController);
 app.get("/auth/imagekit", imagekitController);
 
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
   connect();
   console.log(`Listening @ http://localhost:${port}`);
 });
