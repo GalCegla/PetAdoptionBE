@@ -1,1 +1,1 @@
-start: npx nodemon server
+start: node server.js
